@@ -23,6 +23,10 @@ def get_option(name, default = None):
     else:
         return var_value
 
+def get_config(name, default = None):
+    env_var_name = string.upper(name)
+    return os.getenv(env_var_name)
+
 def pretty_null(value):
     if value is None:
         return "n/a"
