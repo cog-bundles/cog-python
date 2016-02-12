@@ -2,6 +2,10 @@ from __future__ import print_function
 import json
 import sys
 
+def log(message):
+    print("LOG: %s" % (message), end="\n", file=sys.stdout)
+    sys.stdout.flush()
+
 def send_json(data, fd=sys.stdout):
     print("JSON", end="\n", file=fd)
     print(json.dumps(data), end="\n", file=fd)
