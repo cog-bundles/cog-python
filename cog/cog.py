@@ -1,15 +1,6 @@
-import json
 import string
 import os
 import sys
-
-def send_json(data):
-    print "JSON\n"
-    print "%s\n" % (json.dumps(data))
-    sys.stdout.flush()
-
-def send_error(text):
-    send_json({"error": text})
 
 def command_name():
     return os.getenv("COG_COMMAND")
