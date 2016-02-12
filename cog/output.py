@@ -1,13 +1,15 @@
+from __future__ import print_function
 import json
 import sys
 
-def send_json(data):
-    print "JSON\n"
-    print "%s\n" % (json.dumps(data))
-    sys.stdout.flush()
+def send_json(data, fd=sys.stdout):
+    print("JSON", end="\n", file=fd)
+    print(json.dumps(data), end="\n", file=fd)
+    fd.flush()
 
 def send_error(text):
-    send_json({"error": text})
+    print(text, end="\n", file=sys.stderr)
+    sys.stderr.flush()
 
 def finish(error=False):
     if error:
