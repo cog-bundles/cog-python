@@ -2,10 +2,12 @@ from __future__ import print_function
 import json
 import sys
 
-def send_json(data, fd=sys.stdout):
-    print("JSON", end="\n", file=fd)
-    print(json.dumps(data), end="\n", file=fd)
-    fd.flush()
+def send_json(data, template=None):
+    if template is not None:
+        print("COG_TEMPLATE: %s" % (template), end="\n", file=sys.stdout)
+    print("JSON", end="\n", file=sys.stdout)
+    print(json.dumps(data), end="\n", file=sys.stdout)
+    sys.stdout.flush()
 
 def send_error(text):
     print(text, end="\n", file=sys.stderr)
