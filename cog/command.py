@@ -33,7 +33,7 @@ class Request(object):
         if self.argc_ == 1:
             self.args_.append(os.getenv(self.index_to_arg_var_(0)))
         else:
-            for i in range(0, self.argc_ - 1):
+            for i in range(0, self.argc_):
                 self.args_.append(os.getenv(self.index_to_arg_var_(i)))
 
     def load_options_(self):
