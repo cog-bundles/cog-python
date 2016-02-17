@@ -153,7 +153,6 @@ class Command(object):
                 try:
                     handler = getattr(self, handler_name)
                 except AttributeError:
-                    Logger.info("Dynamic handler lookup for action '%s' failed" % (action))
                     handler = default
             handler()
         self.resp.commit()
