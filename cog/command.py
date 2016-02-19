@@ -51,7 +51,7 @@ class Request(object):
     def option_names(self):
         return list(self.option_names_)
 
-    def option(self, name, default=""):
+    def option(self, name, default=None):
         if self.options_.has_key(name):
             return self.options_[name]
         else:
