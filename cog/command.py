@@ -24,17 +24,12 @@ class Request(object):
 
     def load_args_(self):
         self.argc_ = 0
+        self.args_ = []
         cog_argc = os.getenv("COG_ARGC")
         if cog_argc is not None:
             self.argc_ = int(cog_argc)
-        self.args_ = []
-        if self.argc_ == 0:
-            return
-        if self.argc_ == 1:
-            self.args_.append(os.getenv(self.index_to_arg_var_(0)))
-        else:
-            for i in range(0, self.argc_):
-                self.args_.append(os.getenv(self.index_to_arg_var_(i)))
+        for i in range(self.argc_):
+            self.args_.append(os.getenv(self.index_to_arg_var_(i)))
 
     def load_options_(self):
         self.option_names_ = []
@@ -56,7 +51,7 @@ class Request(object):
     def option_names(self):
         return list(self.option_names_)
 
-    def option(self, name, default=None):
+    def option(self, name, default=""):
         if self.options_.has_key(name):
             return self.options_[name]
         else:
@@ -66,15 +61,15 @@ class Request(object):
         return dict(self.options_)
 
     def arg_count(self):
-        return self.argc_
+        return len(self.args_)
 
     def arg(self, index):
         if index >= self.argc_:
-            return nil
+            return ""
         return self.args_[index]
 
     def args(self):
-        return list(self.args_)
+        return self.args_
 
     def config(self, name, default = None):
         config_value = os.getenv(string.upper(name))
