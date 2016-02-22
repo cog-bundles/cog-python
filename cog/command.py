@@ -23,12 +23,9 @@ class Request(object):
         self.requestor_ = os.getenv("COG_CHAT_HANDLE")
 
     def load_args_(self):
-        self.argc_ = 0
         self.args_ = []
-        cog_argc = os.getenv("COG_ARGC")
-        if cog_argc is not None:
-            self.argc_ = int(cog_argc)
-        for i in range(self.argc_):
+        cog_argc = int(os.getenv("COG_ARGC", 0))
+        for i in range(cog_argc):
             self.args_.append(os.getenv(self.index_to_arg_var_(i)))
 
     def load_options_(self):
@@ -64,12 +61,12 @@ class Request(object):
         return len(self.args_)
 
     def arg(self, index):
-        if index >= self.argc_:
-            return ""
+        if index >= len(self.args_):
+            return None
         return self.args_[index]
 
     def args(self):
-        return self.args_
+        return list(self.args_)
 
     def config(self, name, default = None):
         config_value = os.getenv(string.upper(name))
