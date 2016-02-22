@@ -23,18 +23,10 @@ class Request(object):
         self.requestor_ = os.getenv("COG_CHAT_HANDLE")
 
     def load_args_(self):
-        self.argc_ = 0
-        cog_argc = os.getenv("COG_ARGC")
-        if cog_argc is not None:
-            self.argc_ = int(cog_argc)
         self.args_ = []
-        if self.argc_ == 0:
-            return
-        if self.argc_ == 1:
-            self.args_.append(os.getenv(self.index_to_arg_var_(0)))
-        else:
-            for i in range(0, self.argc_):
-                self.args_.append(os.getenv(self.index_to_arg_var_(i)))
+        cog_argc = int(os.getenv("COG_ARGC", 0))
+        for i in range(cog_argc):
+            self.args_.append(os.getenv(self.index_to_arg_var_(i)))
 
     def load_options_(self):
         self.option_names_ = []
@@ -66,11 +58,11 @@ class Request(object):
         return dict(self.options_)
 
     def arg_count(self):
-        return self.argc_
+        return len(self.args_)
 
     def arg(self, index):
-        if index >= self.argc_:
-            return nil
+        if index >= len(self.args_):
+            return None
         return self.args_[index]
 
     def args(self):
