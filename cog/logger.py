@@ -1,9 +1,7 @@
-from __future__ import print_function
-
 import sys
 
 class Logger(object):
-    Debug, Info, Warn, Error = range(4)
+    Debug, Info, Warn, Error = list(range(4))
 
     @classmethod
     def _write_log_message(cls, message, level):

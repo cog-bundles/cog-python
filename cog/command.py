@@ -1,4 +1,3 @@
-from __future__ import print_function
 import json
 import os
 import re
@@ -48,7 +47,7 @@ class Request(object):
         return list(self.option_names_)
 
     def option(self, name, default=None):
-        if name in self.options_.keys():
+        if name in self.options_:
             return self.options_[name]
         else:
             return default
@@ -130,14 +129,14 @@ class Command(object):
 
     def invoke(self):
         default = self.usage_error
-        if "default" in self.handlers.keys():
+        if "default" in self.handlers:
             default = self.handlers["default"]
         if self.req.arg_count() == 0:
             default()
         else:
             handler = None
             action = self.req.arg(0)
-            if self.handlers.has_key(action):
+            if action in self.handlers:
                 handler = self.handlers[action]
             else:
                 handler_name = "handle_%s" % (action)
