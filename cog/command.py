@@ -2,7 +2,6 @@ from __future__ import print_function
 import json
 import os
 import re
-import string
 import sys
 
 from cog.logger import Logger
@@ -14,7 +13,7 @@ class Request(object):
         self.load_requestor_()
 
     def name_to_option_var_(self, name):
-        return "COG_OPT_%s" % (string.upper(name))
+        return "COG_OPT_%s" % (name.upper())
 
     def index_to_arg_var_(self, index):
         return "COG_ARGV_" + str(index)
@@ -69,7 +68,7 @@ class Request(object):
         return list(self.args_)
 
     def config(self, name, default = None):
-        config_value = os.getenv(string.upper(name))
+        config_value = os.getenv(name.upper())
         if config_value is None:
             return default
         else:
