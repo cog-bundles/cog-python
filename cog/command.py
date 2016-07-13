@@ -48,7 +48,7 @@ class Request(object):
         return list(self.option_names_)
 
     def option(self, name, default=None):
-        if self.options_.has_key(name):
+        if name in self.options_.keys():
             return self.options_[name]
         else:
             return default
@@ -130,7 +130,7 @@ class Command(object):
 
     def invoke(self):
         default = self.usage_error
-        if self.handlers.has_key("default"):
+        if "default" in self.handlers.keys():
             default = self.handlers["default"]
         if self.req.arg_count() == 0:
             default()
